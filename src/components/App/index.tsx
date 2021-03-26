@@ -1,23 +1,22 @@
-import logo from "../../assets/logo.svg"
+import { useState } from "react"
 import "./styles.css"
 
 export function App() {
+  const [todos, setTodos] = useState<{ id: string; description: string }[]>([])
+  const saveTodo = () => {
+    setTodos([{ id: "1", description: "Buy milk" }])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/components/App/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.description}</li>
+        ))}
+      </ul>
+      <button>Create Todo</button>
+      <input type="text" placeholder="Todo description..." />
+      <button onClick={saveTodo}>Save</button>
     </div>
   )
 }
